@@ -42,8 +42,17 @@ axios.get("https://api.github.com/users/billydean")
     luishrd
     bigknell
 */
-const instructorNames = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"]
-const followersArray = [];
+const followersArray = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
+
+followersArray.forEach(name => {
+  axios.get(`https://api.github.com/users/${name}`)
+    .then(resp => {
+      const newCard = cardMaker(resp.data);
+      document.querySelector(".cards")
+        .appendChild(newCard);
+    })
+    .catch(err => console.error(err))
+});
 
 
 
